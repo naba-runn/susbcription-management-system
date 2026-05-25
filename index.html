@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Manage your subscriptions easily — browse plans, subscribe, and track your active subscriptions all in one place." />
+  <title>SubMS — Subscription Management System</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVBAR
+       ========================================================= -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-brand">
+      <div class="logo-icon" aria-hidden="true">⚡</div>
+      <span>SubMS</span>
+    </div>
+    <div class="navbar-links" id="nav-links">
+      <!-- Rendered by JS based on auth state -->
+    </div>
+  </nav>
+
+  <!-- =========================================================
+       PAGE: LOGIN
+       ========================================================= -->
+  <section id="page-login" class="page-wrapper" aria-label="Login page">
+    <div class="auth-wrapper">
+      <div class="auth-card" role="main">
+        <h2>Welcome back</h2>
+        <p class="auth-subtitle">Sign in to manage your subscriptions</p>
+
+        <div id="login-form-wrap">
+          <form id="login-form" novalidate>
+            <div class="form-group">
+              <label for="login-email">Email Address</label>
+              <input type="email" id="login-email" placeholder="you@example.com"
+                     autocomplete="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" placeholder="••••••••"
+                     autocomplete="current-password" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="btn-login">
+              Sign In
+            </button>
+          </form>
+        </div>
+
+        <div class="auth-switch">
+          Don't have an account?
+          <a id="go-register" href="#" tabindex="0">Create one</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PAGE: REGISTER
+       ========================================================= -->
+  <section id="page-register" class="page-wrapper" aria-label="Register page">
+    <div class="auth-wrapper">
+      <div class="auth-card" role="main">
+        <h2>Create account</h2>
+        <p class="auth-subtitle">Join and explore our subscription plans</p>
+
+        <div id="register-form-wrap">
+          <form id="register-form" novalidate>
+            <div class="form-group">
+              <label for="reg-name">Full Name</label>
+              <input type="text" id="reg-name" placeholder="John Doe"
+                     autocomplete="name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="reg-email">Email Address</label>
+              <input type="email" id="reg-email" placeholder="you@example.com"
+                     autocomplete="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="reg-password">Password</label>
+              <input type="password" id="reg-password" placeholder="Min. 6 characters"
+                     autocomplete="new-password" required minlength="6" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="btn-register">
+              Create Account
+            </button>
+          </form>
+        </div>
+
+        <div class="auth-switch">
+          Already have an account?
+          <a id="go-login" href="#" tabindex="0">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PAGE: PLANS
+       ========================================================= -->
+  <section id="page-plans" class="page-wrapper" aria-label="Available plans">
+    <div class="container">
+      <div class="page-hero">
+        <h1>Choose Your Plan</h1>
+        <p>Flexible plans for everyone. Cancel anytime, no hidden fees.</p>
+      </div>
+
+      <div class="filter-bar" style="margin-bottom: 24px; display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+           <label for="category-filter" style="font-weight: 600; color: var(--text-secondary);">Filter Category:</label>
+           <select id="category-filter" style="padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-card); color: var(--text-primary); font-size: 0.9rem; outline: none;">
+              <option value="all">All</option>
+           </select>
+         </div>
+         <div style="display: flex; align-items: center; gap: 8px;">
+           <input type="text" id="coupon-input" placeholder="Coupon Code" style="padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-card); color: var(--text-primary); font-size: 0.9rem; outline: none;" />
+           <button id="apply-coupon-btn" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.85rem;">Apply</button>
+           <span id="coupon-msg" style="font-size: 0.8rem; font-weight: 600;"></span>
+         </div>
+      </div>
+
+      <div class="cards-grid" id="plans-grid" role="list" aria-live="polite">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PAGE: DASHBOARD
+       ========================================================= -->
+  <section id="page-dashboard" class="page-wrapper" aria-label="User dashboard">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="dashboard-header">
+        <h2>My Subscriptions</h2>
+        <div class="user-info-chip">
+          <div class="user-avatar" id="user-avatar" aria-hidden="true">U</div>
+          <span class="user-name" id="user-name-display">User</span>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="stats-row" id="stats-row" aria-label="Subscription statistics">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Subscriptions grid -->
+      <h3 style="margin-bottom: 16px; margin-top: 10px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">Subscriptions</h3>
+      <div class="cards-grid" id="subscriptions-grid" role="list" aria-live="polite">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Payment Methods Section -->
+      <h3 style="margin-bottom: 16px; margin-top: 48px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">Payment Methods</h3>
+      <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+        <div id="payment-methods-list" style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 12px;">
+          <!-- Populated by JS -->
+        </div>
+        <div style="flex: 1; min-width: 280px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px;">
+          <h4 style="margin-bottom: 12px; font-weight: 600;">Add New Method</h4>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <select id="new-method-type" style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); outline: none;">
+               <option value="CARD">Credit / Debit Card</option>
+               <option value="UPI">UPI</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <input type="text" id="new-method-details" placeholder="Card number or UPI ID" style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); outline: none;" />
+          </div>
+          <button class="btn btn-outline btn-block" id="btn-add-method" style="padding: 10px;">Save Method</button>
+        </div>
+      </div>
+
+      <!-- Invoices Section -->
+      <h3 style="margin-bottom: 16px; margin-top: 48px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">Invoices</h3>
+      <div class="table-responsive" id="invoices-section" style="overflow-x: auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px;">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Spending Chart Section -->
+      <h3 style="margin-bottom: 16px; margin-top: 48px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">Monthly Spending</h3>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; position: relative; height: 300px; width: 100%;">
+        <canvas id="spendingChart"></canvas>
+      </div>
+
+      <!-- Payments Section -->
+      <h3 style="margin-bottom: 16px; margin-top: 48px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">Payment History</h3>
+      <div class="table-responsive" id="payments-section" style="overflow-x: auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px;">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Notifications Section -->
+      <h3 style="margin-bottom: 16px; margin-top: 48px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">Recent Notifications</h3>
+      <div id="notifications-section" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 60px;">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SCRIPT
+       ========================================================= -->
+  <script src="js/app.js"></script>
+</body>
+</html>
