@@ -1,4 +1,4 @@
-# ⚡ SubMS — Subscription Management System
+#  SubMS — Subscription Management System
 
 SubMS is a premium, SaaS-ready **Subscription Management System** built with a stunning, high-performance neon-dark **Glassmorphic** frontend, a secure **PHP/MySQL REST API** backend, and clean, responsive vanilla styles.
 
@@ -6,41 +6,36 @@ Manage, monitor, and optimize your subscriptions easily—browse premium plans, 
 
 ---
 
-## ✨ Features & Capabilities
+##  Features 
 
-### 🎨 1. Premium Glassmorphic UI/UX
-- **Sleek Obsidian & Violet Theme**: A curated dark-mode color scheme with neon violet accents and gradients that give the application a premium SaaS product aesthetic.
-- **Glassmorphic Design**: Containers, cards, tables, and popovers feature backdrop blur (`backdrop-filter`), elegant semi-transparent borders, and soft interactive shadows.
-- **Smooth Micro-Animations**: Built-in staggered fade-in animations (`fade-in-up`) that occur as elements load to make the app feel alive and extremely premium.
-- **Responsive Layout**: Seamless cross-device optimization supporting mobile, tablet, and desktop views.
 
-### 💳 2. Dynamic Plan Browsing & Category Filtering
+### 1. Dynamic Plan Browsing & Category Filtering
 - **Category Filter System**: Sort subscription plans instantly by category (e.g., *Entertainment & Streaming*, *Developer & SaaS Tools*, *Cloud & Hosting*, *Productivity & Work*).
 - **"Most Popular" Visual Highlights**: Highly engaging badges designed to direct users toward featured plans.
 - **Promotional Coupons**: Real-time validation for active discount codes (e.g., `WELCOME20`, `SUPER50`) that recalculates pricing on-the-fly and reflects dynamic savings on checkout cards.
 
-### 📊 3. Centralized Subscription Dashboard
+### 2. Centralized Subscription Dashboard
 - **Active Subscriptions Tracking**: Displays active plans, pricing, start and end dates, and real-time status.
 - **Flexible Management**: Auto-renew toggling and one-click instant cancellation capabilities.
 - **Auto-Expire Engine**: Smart check logic that automatically transitions expired subscriptions to an `EXPIRED` status upon user dashboard login, sending clear system notifications.
 
-### 💰 4. Integrated Billing & Invoices
+### 3. Integrated Billing & Invoices
 - **Custom Payment Methods**: Securely link custom credit cards or UPI IDs directly to your profile.
 - **Invoice Records Database**: Auto-generates high-fidelity invoice records for every successful billing cycle.
 - **Printable Invoices**: Provides clean, professional HTML invoice downloads with custom billable details, automatic serial padding (`#INV-0001`), and an automatic browser print trigger.
 
-### 🔔 5. Real-Time Activity Feed & Notifications
+### 4. Real-Time Activity Feed & Notifications
 - Centralized message logs detailing active transactions, cancellation confirmations, expiration warnings, and applied discounts.
 - Easily mark notifications as read to keep the feed organized.
 
 ---
 
-## 📂 Directory Structure
+##  Directory Structure
 
 The project separates dynamic business logic from layout styles for maximum readability and scalability:
 
 ```text
-project7/
+susbcription-management-system/
 ├── index.html                  # Main Single-Page Application (SPA) entry
 ├── database.sql                # Full MySQL schema creation and seed database script
 ├── README.md                   # This comprehensive documentation file
@@ -77,7 +72,7 @@ project7/
 
 ---
 
-## 🗄️ Database Schema & Architecture
+##  Database Schema & Architecture
 
 The database is built on a clean, relational SQL schema. All tables and relationship rules are pre-configured in [database.sql](file:///Users/nabarundey/project7/database.sql).
 
@@ -108,7 +103,7 @@ erDiagram
 
 ---
 
-## 🚀 Setup & Installation Guide
+## Setup & Installation Guide
 
 Follow these steps to deploy and run SubMS on a local environment:
 
@@ -158,19 +153,4 @@ You can log in immediately to inspect the pre-seeded account and dashboard histo
 
 ---
 
-## ⚡ Technical Highlights
 
-### 🚀 Cache-Busting Versioning
-To prevent aggressive web browsers from displaying cached obsolete styles and scripts during updates, SubMS uses query-string versioning. Whenever styles or assets are updated, local requests are served with dynamic cache tokens:
-```html
-<link rel="stylesheet" href="css/style.css?v=2.0" />
-```
-This forces the browser to discard cache records immediately and load the latest layout system.
-
-### 🛡️ Secure PHP Transactions
-The subscription pipeline uses multi-step SQL queries executed with **Prepared Statements** (`mysqli_prepare`) to prevent SQL Injection attacks. Subscription, Payment, Invoice, Notification, and Reminder inserts occur synchronously in a secure transaction workflow.
-
----
-
-## 📝 License
-This project is open-source and available under the **MIT License**.
