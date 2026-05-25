@@ -140,11 +140,11 @@ $dbname = "subscription_system2";
 
 ### Step 4: Run the Application!
 Open your web browser and load:
-👉 **[http://localhost/project/](http://localhost/project/)**
+**[http://localhost/project/](http://localhost/project/)**
 
 ---
 
-## 🔑 Default Test Credentials
+## Default Test Credentials
 
 You can log in immediately to inspect the pre-seeded account and dashboard history:
 
